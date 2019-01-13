@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
-
 import Img from 'gatsby-image'
+
 const Card = styled.div`
   border-radius: 4px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);

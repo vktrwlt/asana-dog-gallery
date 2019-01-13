@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
+import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'
 import DogCard from '../components/DogCard/DogCard'
 import { dogs } from '../data/dogs.json'
 import Modal from '../components/UI/Modal/Modal'
 import Grid from '../components/UI/Grid/Grid'
-import { graphql } from 'gatsby'
 
 class IndexPage extends Component {
   state = {
@@ -24,6 +24,13 @@ class IndexPage extends Component {
       dogPrevIndex: index - 1,
       dogNextIndex: index + 1,
     })
+
+    // remove scrolling if modal is active
+    if (this.state.modalActive) {
+      document.body.style.overflow = 'auto'
+    } else {
+      document.body.style.overflow = 'hidden'
+    }
   }
   // move to the next or previous dog img when you open the modal
   dogCarousel = direction => {
