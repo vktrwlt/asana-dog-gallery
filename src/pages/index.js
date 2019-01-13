@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Layout from '../components/Layout'
-import SEO from '../components/SEO'
+import Seo from '../components/Seo'
 import DogCard from '../components/DogCard/DogCard'
 import { dogs } from '../data/dogs.json'
 import Modal from '../components/UI/Modal/Modal'
@@ -50,7 +50,7 @@ class IndexPage extends Component {
   render() {
     return (
       <Layout>
-        <SEO
+        <Seo
           title="Puppy Image Gallery"
           keywords={[`asana`, `pet adoption`, `dog`, `puppy`]}
         />
