@@ -88,7 +88,6 @@ const Modal = ({
 
   if (showDog) {
     image = showDog ? showDog.node.fluid.originalImg : 'null'
-    console.log(image)
   }
   // hide prev arrow if first dog or next arrow if last dog
   let showLeftArrow = null
@@ -135,7 +134,7 @@ const Modal = ({
           <FaTimes />
         </IconWrapper>
         <ImgWrapper onClick={() => toggleModal(false)}>
-          {showDog ? <Img src={withPrefix(image)} /> : null}
+          {showDog ? <Img src={withPrefix(image)} alt="dog" /> : null}
         </ImgWrapper>
       </ModalContainer>
       <Backdrop active={active} />

@@ -49,8 +49,6 @@ class IndexPage extends Component {
   }
 
   render() {
-    console.log(this.props.data.allImageSharp.edges)
-    let dogEdge = this.props.data.allImageSharp.edges
     return (
       <Layout>
         <Seo
@@ -58,16 +56,7 @@ class IndexPage extends Component {
           keywords={[`asana`, `pet adoption`, `dog`, `puppy`]}
         />
         <Grid>
-          {/* {dogs.map((dog, index) => (
-            <DogCard
-              dog={dog}
-              key={index}
-              index={index}
-              toggleModal={this.toggleModal}
-            />
-		  ))} */}
           {this.props.data.allImageSharp.edges.map((dog, index) => {
-            // console.log(dog)
             return (
               <DogCard
                 dog={dog.node.fixed}
