@@ -84,8 +84,12 @@ const Modal = ({
   dogNextIndex,
   dogCarousel,
 }) => {
-  let image = showDog ? showDog.image : 'null'
+  let image = null
 
+  if (showDog) {
+    image = showDog ? showDog.node.fluid.originalImg : 'null'
+    console.log(image)
+  }
   // hide prev arrow if first dog or next arrow if last dog
   let showLeftArrow = null
   let showRightArrow = null

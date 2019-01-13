@@ -5,6 +5,7 @@ import DogCard from '../components/DogCard/DogCard'
 import { dogs } from '../data/dogs.json'
 import Modal from '../components/UI/Modal/Modal'
 import Grid from '../components/UI/Grid/Grid'
+import { graphql } from 'gatsby'
 
 class IndexPage extends Component {
   state = {
@@ -18,7 +19,7 @@ class IndexPage extends Component {
   toggleModal = index => {
     this.setState({
       modalActive: !this.state.modalActive,
-      showDog: dogs[index],
+      showDog: this.props.data.allImageSharp.edges[index],
       dogIndex: index,
       dogPrevIndex: index - 1,
       dogNextIndex: index + 1,
@@ -40,7 +41,7 @@ class IndexPage extends Component {
         return null
     }
     this.setState({
-      showDog: dogs[newIndex],
+      showDog: this.props.data.allImageSharp.edges[newIndex],
       dogIndex: newIndex,
       dogPrevIndex: newIndex - 1,
       dogNextIndex: newIndex + 1,
@@ -48,6 +49,8 @@ class IndexPage extends Component {
   }
 
   render() {
+    console.log(this.props.data.allImageSharp.edges)
+    let dogEdge = this.props.data.allImageSharp.edges
     return (
       <Layout>
         <Seo
@@ -55,14 +58,25 @@ class IndexPage extends Component {
           keywords={[`asana`, `pet adoption`, `dog`, `puppy`]}
         />
         <Grid>
-          {dogs.map((dog, index) => (
+          {/* {dogs.map((dog, index) => (
             <DogCard
               dog={dog}
               key={index}
               index={index}
               toggleModal={this.toggleModal}
             />
-          ))}
+		  ))} */}
+          {this.props.data.allImageSharp.edges.map((dog, index) => {
+            // console.log(dog)
+            return (
+              <DogCard
+                dog={dog.node.fixed}
+                key={dog.node.id}
+                index={index}
+                toggleModal={this.toggleModal}
+              />
+            )
+          })}
         </Grid>
         <Modal
           active={this.state.modalActive}
@@ -79,3 +93,41 @@ class IndexPage extends Component {
 }
 
 export default IndexPage
+
+export const dogThumnbnails = graphql`
+  query dogThumbnails {
+    allImageSharp {
+      edges {
+        node {
+          id
+          fixed(height: 350, width: 350) {
+            base64
+            tracedSVG
+            aspectRatio
+            width
+            height
+            src
+            srcSet
+            srcWebp
+            srcSetWebp
+            originalName
+          }
+          fluid {
+            base64
+            tracedSVG
+            aspectRatio
+            src
+            srcSet
+            srcWebp
+            srcSetWebp
+            sizes
+            originalImg
+            originalName
+            presentationWidth
+            presentationHeight
+          }
+        }
+      }
+    }
+  }
+`
