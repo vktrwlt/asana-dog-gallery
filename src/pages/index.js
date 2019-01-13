@@ -1,24 +1,10 @@
 import React, { Component } from 'react'
 import Layout from '../components/Layout'
-import SEO from '../components/Seo'
+import SEO from '../components/SEO'
 import DogCard from '../components/DogCard/DogCard'
-import styled from '@emotion/styled'
 import { dogs } from '../data/dogs.json'
 import Modal from '../components/UI/Modal/Modal'
-
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 30px;
-  grid-auto-rows: minmax(100px, auto);
-
-  @media only screen and (max-width: 980px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media only screen and (max-width: 767px) {
-    grid-template-columns: 1fr;
-  }
-`
+import Grid from '../components/UI/Grid/Grid'
 
 class IndexPage extends Component {
   state = {
@@ -49,6 +35,9 @@ class IndexPage extends Component {
         break
       case 'prev':
         newIndex = this.state.dogPrevIndex
+        break
+      default:
+        return null
     }
     this.setState({
       showDog: dogs[newIndex],
@@ -61,7 +50,10 @@ class IndexPage extends Component {
   render() {
     return (
       <Layout>
-        <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
+        <SEO
+          title="Puppy Image Gallery"
+          keywords={[`asana`, `pet adoption`, `dog`, `puppy`]}
+        />
         <Grid>
           {dogs.map((dog, index) => (
             <DogCard
